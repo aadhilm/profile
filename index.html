@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AADHIL M | Portfolio</title>
+    <title>AADHIL M | Cyber Portfolio</title>
     <style>
         :root {
-    --primary: #0ff0fc;
-    --secondary: #05d9e8;
-    --accent: #05d9e8;
-    --dark: #01012b;
-    --darker: #00022e;
-    --text: #d1f7ff;
-    --glass: rgba(1, 1, 43, 0.6);
-}
+            --primary: #00f0ff;
+            --secondary: #00c8ff;
+            --accent: #ff2a6d;
+            --dark: #0d0221;
+            --darker: #050519;
+            --text: #d1f7ff;
+            --neon-glow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary);
+        }
         
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&display=swap');
         
         * {
             margin: 0;
@@ -25,56 +25,108 @@
         
         body {
             font-family: 'Rajdhani', sans-serif;
-            background: var(--dark);
+            background-color: var(--dark);
             color: var(--text);
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(5, 217, 232, 0.1) 0%, transparent 30%),
-                radial-gradient(circle at 80% 70%, rgba(255, 42, 109, 0.1) 0%, transparent 30%);
-            min-height: 100vh;
+            line-height: 1.6;
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 200, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 42, 109, 0.05) 0%, transparent 20%);
         }
         
         h1, h2, h3, h4, nav {
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            font-weight: normal;
         }
         
-        .bg-grid {
+        .terminal-effect {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(90deg, var(--darker) 21px, transparent 1%) center,
-                linear-gradient(var(--darker) 21px, transparent 1%) center,
-                var(--primary);
-            background-size: 22px 22px;
-            z-index: -2;
-            opacity: 0.1;
+                linear-gradient(rgba(13, 2, 33, 0.9), rgba(13, 2, 33, 0.9)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="1" height="1" x="20" y="20" fill="%2300f0ff" opacity="0.1"/></svg>');
+            z-index: -1;
+        }
+        
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom, 
+                    rgba(0, 240, 255, 0.03) 0%, 
+                    rgba(0, 240, 255, 0) 50%, 
+                    rgba(0, 240, 255, 0.03) 100%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 0;
+            animation: scanline 8s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
         }
         
         header {
-            padding: 5rem 0 3rem;
+            padding: 4rem 0 2rem;
             text-align: center;
             position: relative;
+            z-index: 1;
         }
         
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
         }
         
         .profile-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 2rem;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1.5rem;
             border-radius: 50%;
-            border: 3px solid var(--primary);
+            border: 2px solid var(--primary);
             padding: 5px;
-            box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            box-shadow: var(--neon-glow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+        
+        .profile-container:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+        
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right, 
+                transparent, 
+                transparent, 
+                transparent, 
+                var(--primary)
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
         }
         
         .profile-img {
@@ -82,108 +134,180 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            filter: grayscale(30%) contrast(110%);
-            border: 1px solid var(--accent);
+            position: relative;
+            z-index: 1;
+            filter: grayscale(20%) contrast(110%);
+            border: 1px solid rgba(0, 200, 255, 0.5);
         }
         
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary);
+            text-shadow: 0 0 5px var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+            color: var(--accent);
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
         
         .tagline {
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .scrolling-text {
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            margin: 1rem 0;
-            border-top: 1px solid rgba(5, 217, 232, 0.3);
-            border-bottom: 1px solid rgba(5, 217, 232, 0.3);
-            padding: 0.5rem 0;
-        }
-        
-        .scrolling-text-content {
-            display: inline-block;
-            animation: scroll 20s linear infinite;
-            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
             color: var(--secondary);
-            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 5px var(--secondary);
         }
         
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .matrix-code {
+            width: 100%;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            margin: 1rem 0;
+            overflow: hidden;
+            position: relative;
+            border-top: 1px solid rgba(0, 200, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 200, 255, 0.2);
+        }
+        
+        .matrix-code::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom, 
+                rgba(0, 240, 255, 0.1) 0%, 
+                transparent 10%, 
+                transparent 90%, 
+                rgba(0, 240, 255, 0.1) 100%
+            );
         }
         
         nav {
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            background: var(--glass);
-            border-bottom: 1px solid rgba(5, 217, 232, 0.2);
+            background: rgba(5, 5, 25, 0.8);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(0, 200, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
         
         nav ul {
             display: flex;
             justify-content: center;
             list-style: none;
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             max-width: 1200px;
             margin: 0 auto;
+            flex-wrap: wrap;
         }
         
         nav li {
-            margin: 0 2rem;
+            margin: 0 1.5rem;
+            position: relative;
+        }
+        
+        nav li::after {
+            content: '//';
+            color: var(--accent);
+            position: absolute;
+            right: -1.5rem;
+        }
+        
+        nav li:last-child::after {
+            display: none;
         }
         
         nav a {
             color: var(--text);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
         }
         
         nav a:hover {
             color: var(--primary);
+            text-shadow: 0 0 5px var(--primary);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
         }
         
         .container {
             max-width: 1200px;
-            margin: 3rem auto;
+            margin: 2rem auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         section {
-            margin-bottom: 4rem;
-            padding: 2.5rem;
-            background: var(--glass);
-            border-radius: 15px;
-            border: 1px solid rgba(5, 217, 232, 0.2);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(5, 5, 25, 0.5);
+            border-radius: 5px;
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--primary);
+            transition: height 0.5s ease;
         }
         
         section:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
+        }
+        
+        section:hover::before {
+            height: 100%;
         }
         
         h2 {
             color: var(--primary);
-            margin-bottom: 2rem;
-            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
             position: relative;
+            display: inline-block;
         }
         
         h2::after {
@@ -192,31 +316,31 @@
             bottom: -10px;
             left: 0;
             width: 50px;
-            height: 3px;
+            height: 2px;
             background: var(--accent);
         }
         
         /* Experience Section Styles */
         .timeline {
             position: relative;
-            padding-left: 50px;
+            padding-left: 30px;
         }
         
         .timeline::before {
             content: '';
             position: absolute;
-            left: 15px;
+            left: 10px;
             top: 0;
             bottom: 0;
             width: 2px;
-            background: var(--primary);
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
         }
         
         .experience-item {
             position: relative;
             margin-bottom: 2rem;
             padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(5, 217, 232, 0.2);
+            border-bottom: 1px solid rgba(0, 200, 255, 0.1);
         }
         
         .experience-item:last-child {
@@ -228,23 +352,25 @@
         .experience-item::before {
             content: '';
             position: absolute;
-            left: -35px;
+            left: -25px;
             top: 5px;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: #000000; /* Changed to black */
-            border: 2px solid var(--primary); /* Keeps the cyan border */
+            background: var(--dark);
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 5px var(--primary);
         }
         
         .experience-date {
-            color: var(--accent);
+            color: var(--secondary);
             font-weight: 500;
             margin-bottom: 0.5rem;
+            font-family: 'Share Tech Mono', monospace;
         }
         
         .experience-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
             color: var(--primary);
         }
@@ -253,9 +379,12 @@
             font-weight: 700;
             margin-bottom: 1rem;
             display: inline-block;
-            background: rgba(5, 217, 232, 0.1);
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
+            background: rgba(0, 200, 255, 0.1);
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--secondary);
+            font-size: 0.9rem;
         }
         
         .experience-description {
@@ -265,36 +394,68 @@
         .projects {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
         }
         
         .project-card {
-            background: rgba(1, 1, 43, 0.7);
-            border-radius: 10px;
+            background: rgba(13, 2, 33, 0.7);
+            border-radius: 5px;
             overflow: hidden;
-            border: 1px solid rgba(5, 217, 232, 0.2);
+            border: 1px solid rgba(0, 200, 255, 0.2);
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(5, 217, 232, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 240, 255, 0.1) 0%,
+                transparent 50%,
+                rgba(255, 42, 109, 0.1) 100%
+            );
+            z-index: 1;
         }
         
         .project-img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
+            filter: grayscale(30%) contrast(110%);
+            transition: filter 0.3s ease;
+        }
+        
+        .project-card:hover .project-img {
+            filter: grayscale(0%) contrast(100%);
         }
         
         .project-info {
-            padding: 1.5rem;
+            padding: 1.2rem;
+            position: relative;
+            z-index: 2;
         }
         
         .project-info h3 {
             color: var(--primary);
             margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .project-info p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: rgba(209, 247, 255, 0.8);
         }
         
         .project-link {
@@ -303,6 +464,13 @@
             color: var(--secondary);
             text-decoration: none;
             font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-link:hover {
+            color: var(--primary);
+            text-shadow: 0 0 5px var(--primary);
         }
         
         .project-link i {
@@ -311,27 +479,34 @@
         }
         
         .project-link:hover i {
-            transform: translateX(5px);
+            transform: translateX(3px);
         }
         
         .skills-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.8rem;
         }
         
         .skill {
-            background: rgba(5, 217, 232, 0.1);
+            background: rgba(0, 200, 255, 0.1);
             border: 1px solid var(--primary);
-            padding: 0.7rem 1.5rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill:hover {
+            background: rgba(0, 200, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 3px 10px rgba(0, 240, 255, 0.2);
         }
         
         .contact-form {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
         
         .form-group.full-width {
@@ -341,79 +516,132 @@
         label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--primary);
+            color: var(--secondary);
+            font-size: 0.9rem;
         }
         
         input, textarea {
             width: 100%;
-            padding: 0.8rem;
-            background: rgba(1, 1, 43, 0.7);
-            border: 1px solid rgba(5, 217, 232, 0.3);
-            border-radius: 5px;
+            padding: 0.7rem;
+            background: rgba(13, 2, 33, 0.7);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            border-radius: 3px;
             color: var(--text);
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 5px var(--primary);
         }
         
         textarea {
-            min-height: 150px;
+            min-height: 120px;
+            resize: vertical;
         }
         
         button {
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            color: var(--dark);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--darker);
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            font-family: 'Orbitron', sans-serif;
+            padding: 0.8rem 1.5rem;
+            border-radius: 3px;
+            font-family: 'Share Tech Mono', monospace;
             font-weight: bold;
             cursor: pointer;
             grid-column: span 2;
-            width: 200px;
+            width: 180px;
             justify-self: center;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right, 
+                transparent, 
+                transparent, 
+                transparent, 
+                rgba(255, 255, 255, 0.3)
+            );
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
         }
         
         button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(5, 217, 232, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+        }
+        
+        button:hover::before {
+            transform: rotate(30deg) translate(30%, 30%);
         }
         
         footer {
             background: var(--darker);
-            padding: 3rem 0;
+            padding: 2rem 0;
             text-align: center;
-            border-top: 1px solid rgba(5, 217, 232, 0.2);
+            border-top: 1px solid rgba(0, 200, 255, 0.2);
+            position: relative;
+            z-index: 1;
         }
         
         .social-links {
             display: flex;
             justify-content: center;
-            margin: 2rem 0;
-            gap: 1.5rem;
+            margin: 1.5rem 0;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
         
         .social-link {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(5, 217, 232, 0.1);
-            border: 1px solid rgba(5, 217, 232, 0.3);
+            background: rgba(0, 200, 255, 0.1);
+            border: 1px solid rgba(0, 200, 255, 0.3);
             color: var(--primary);
-            font-size: 1.2rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
         }
         
         .social-link:hover {
-            background: rgba(5, 217, 232, 0.3);
-            transform: translateY(-5px);
+            background: rgba(0, 200, 255, 0.3);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 0 10px var(--primary);
+        }
+        
+        .copyright {
+            font-size: 0.8rem;
+            color: rgba(209, 247, 255, 0.6);
+            margin-top: 1rem;
         }
         
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0.5rem;
+                padding: 0.5rem 0;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            nav li::after {
+                display: none;
             }
             
             .contact-form {
@@ -429,18 +657,23 @@
             }
             
             .timeline {
-                padding-left: 30px;
+                padding-left: 20px;
             }
             
             .experience-item::before {
-                left: -25px;
+                left: -20px;
+            }
+            
+            .projects {
+                grid-template-columns: 1fr;
             }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="bg-grid"></div>
+    <div class="terminal-effect"></div>
+    <div class="scanlines"></div>
     
     <header>
         <div class="header-content">
@@ -448,14 +681,13 @@
                 <img src="profile.jpg" alt="Profile Photo" class="profile-img">
             </div>
             <h1>AADHIL M</h1>
-            <p class="tagline">DEVELOPER</p>
-            <div class="scrolling-text">
-                <div class="scrolling-text-content">
-                    • WEB DEVELOPER • LINUX TESTER • CUSTOM HARDWARE DEVELOPER • AQUASCAPER •
-                </div>
-            </div>
+            <p class="tagline">CYBER DEVELOPER</p>
+            <div class="matrix-scroll">
+            <div class="matrix-text">• WEB DEVELOPER • LINUX TESTER • CUSTOM HARDWARE DEVELOPER • AQUASCAPER •</div>
         </div>
+    </div>
     </header>
+    
 
     <nav>
         <ul>
@@ -464,45 +696,41 @@
             <li><a href="#experience">Experience</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="#footer">Connect</a></li> 
         </ul>
     </nav>
 
     <div class="container">
         <section id="about">
             <h2>About Me</h2>
-            <p>I am BCA student with strong knowledge of computer networking, cybersecurity, and custom hardware design and development . Experienced in testing Linux OS on various devices. Freelanced in car audio fitting, PC building, and aquascaping. Passionate about solving technical challenges and continuously learning new skills in technology.</p>
+            <p>I am a BCA student with expertise in computer networking, cybersecurity, and custom hardware development. With hands-on experience in Linux OS testing across various platforms, I bring technical knowledge and practical skills to every project. My freelance work spans car audio installation, custom PC building, and aquascaping - reflecting my diverse technical interests and problem-solving approach.</p>
+            <p>Passionate about pushing technological boundaries, I continuously explore new domains to expand my skill set and tackle complex challenges with innovative solutions.</p>
         </section>
 
         <section id="projects">
             <h2>Featured Projects</h2>
             <div class="projects">
                 <div class="project-card">
-                    <img src="project1.png" alt="Project 1" class="project-img">
+                    <img src="project1.png" alt="Terminal Tools" class="project-img">
                     <div class="project-info">
                         <h3>TERMINAL-TOOLS</h3>
-                        <p>A Simple Menu-Based Bash Script that Serves as a Powerful, Flexible, and User-Friendly Tool.
-                            It Integrates Various System Utilities and Fun Features Into a Single Interactive Interface, Allowing Users To Perform a Wide Range Of Tasks From One Command-Line Menu.
-                            </p>
-                        <a href="https://github.com/aadhilm/TERMINAL-TOOLS" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                        <p>A comprehensive bash script menu system integrating various utilities and features into a single interactive command-line interface for efficient system management.</p>
+                        <a href="https://github.com/aadhilm/TERMINAL-TOOLS" class="project-link" target="_blank">View Project <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="project2.png" alt="Project 2" class="project-img">
+                    <img src="project2.png" alt="Session to Session" class="project-img">
                     <div class="project-info">
                         <h3>SESSION--TO--SESSION</h3>
-                        <p>Developed a script to facilitate terminal-to-terminal connections, file transfers, and interactions with network services.
-                            Included an interactive interface for modifying inputs before executing network commands.
-                            Wrote comprehensive documentation to assist users with installation, usage, and troubleshooting.</p>
-                        <a href="https://github.com/aadhilm/SESSION--TO--SESSION" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                        <p>Network utility script enabling terminal connections, file transfers, and service interactions with an intuitive interface for command modification.</p>
+                        <a href="https://github.com/aadhilm/SESSION--TO--SESSION" class="project-link" target="_blank">View Project <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="project3.png" alt="Project 3" class="project-img">
+                    <img src="project3.png" alt="Java Terminal GUI" class="project-img">
                     <div class="project-info">
                         <h3>Java-Terminal-GUI</h3>
-                        <p>This Java program provides an enhanced GUI terminal application for users who wish to perform various file management, system monitoring, and network diagnostics tasks with a user-friendly interface.</p>
-                        <a href="https://github.com/aadhilm/Java-Terminal-GUI" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                        <p>Enhanced terminal application with GUI for streamlined file management, system monitoring, and network diagnostics operations.</p>
+                        <a href="https://github.com/aadhilm/Java-Terminal-GUI" class="project-link" target="_blank">View Project <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
             </div>
@@ -512,31 +740,27 @@
             <h2>Professional Experience</h2>
             <div class="timeline">
                 <div class="experience-item">
-                    <div class="experience-date"> </div>
                     <h3 class="experience-title">CAR AUDIO INSTALLER</h3>
                     <div class="experience-company">FREELANCE</div>
                     <p class="experience-description">
-                        Installed and configured car audio systems to meet client requirements.</p>
-                    </p>Diagnosed and resolved technical issues related to sound quality and system performance.
+                        Specialized in custom car audio system installations, configuration, and troubleshooting with a focus on achieving optimal sound quality and system performance tailored to client specifications.
                     </p>
                 </div>
                 
                 <div class="experience-item">
-                    <div class="experience-date"> </div>
-                    <h3 class="experience-title">PC BUILDING AND SERVICE                    </h3>
+                    <h3 class="experience-title">PC BUILDING AND SERVICE</h3>
                     <div class="experience-company">FREELANCE</div>
                     <p class="experience-description">
-                        Built custom PCs based on client specifications and provided support for hardware upgrades and repairs.</p>
-                    </p>Ensured optimal system performance through careful selection of components and configuration.</p>
+                        Designed and assembled custom PC builds for diverse applications, providing hardware consultation, component selection, and technical support services to ensure peak system performance.
+                    </p>
                 </div>
                 
                 <div class="experience-item">
-                    <div class="experience-date"> </div>
                     <h3 class="experience-title">AQUASCAPING</h3>
                     <div class="experience-company">FREELANCE</div>
                     <p class="experience-description">
-                        Designed and maintained aquascapes, creating visually appealing underwater environments</p>
-                    </p>Provided maintenance and care for aquatic systems, ensuring healthy ecosystems.</p>
+                        Created and maintained visually striking aquatic environments, combining technical knowledge of ecosystem balance with artistic design principles for sustainable underwater landscapes.
+                    </p>
                 </div>
             </div>
         </section>
@@ -544,50 +768,81 @@
         <section id="skills">
             <h2>Technical Skills</h2>
             <div class="skills-container">
-                <span class="skill">ETHICAL HACKING </span>
-                <span class="skill">TESTING LINUX OS</span>
-                <span class="skill">COMPUTER NETWORKING</span>
-                <span class="skill">CAR AUDIO INSTALLER</span>
-                <span class="skill">PC BUILDING AND SERVICE</span>
-                <span class="skill">CUSTOM HARDWARE DEVELOPER</span>
+                <span class="skill">ETHICAL HACKING</span>
+                <span class="skill">LINUX OS TESTING</span>
+                <span class="skill">NETWORKING</span>
+                <span class="skill">CAR AUDIO SYSTEMS</span>
+                <span class="skill">PC BUILDING</span>
+                <span class="skill">HARDWARE DEVELOPMENT</span>
                 <span class="skill">AQUASCAPING</span>
+                <span class="skill">BASH SCRIPTING</span>
+                <span class="skill">JAVA DEVELOPMENT</span>
+                <span class="skill">SYSTEM ADMINISTRATION</span>
             </div>
         </section>
 
         <section id="contact">
             <h2>Contact Me</h2>
-            <p>Have a futuristic project in mind? Let's connect and build something amazing together.</p>
-            <a href="https://forms.gle/V2YiyyK8CfR8YJuB9" 
-               class="project-link" 
-               target="_blank">
-               Open Contact Form <i class="fas fa-external-link-alt"></i>
-            </a>
+            <p>Have a challenging project or technical problem? Let's connect and develop innovative solutions together.</p>
+            <div style="margin-top: 1.5rem;">
+                <a href="https://forms.gle/V2YiyyK8CfR8YJuB9" 
+                   class="project-link" 
+                   target="_blank"
+                   style="display: inline-flex; align-items: center;">
+                   <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Open Contact Form
+                </a>
+            </div>
         </section>
-
     </div>
 
-    <footer id="footer"> 
+    <footer>
         <div class="social-links">
-            <a href="https://github.com/aadhilm" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/m-aadhil-/" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/aadhil_m_/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=61574880802791" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://cyberwallnet.blogspot.com/" class="social-link" target="_blank"><i class="fas fa-globe"></i></a>
+            <a href="https://github.com/aadhilm" class="social-link" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/m-aadhil-/" class="social-link" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/aadhil_m_/" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61574880802791" class="social-link" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://cyberwallnet.blogspot.com/" class="social-link" target="_blank" aria-label="Blog"><i class="fas fa-globe"></i></a>
         </div>
+        <p class="copyright">© <span id="year"></span> AADHIL M. All rights reserved.</p>
     </footer>
 
     <script>
-        // Simple script for GitHub Pages compatibility
+        // Current year for copyright
         document.getElementById('year').textContent = new Date().getFullYear();
-        
-        // Smooth scrolling for anchor links
+        // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
             });
+        });
+        
+        // Section entrance animation
+        const sections = document.querySelectorAll('section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        sections.forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
         });
     </script>
 </body>
