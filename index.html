@@ -392,21 +392,6 @@
       color: var(--primary);
     }
 
-    .certificate-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      color: var(--accent);
-      font-size: 1.2rem;
-      opacity: 0.7;
-      transition: all 0.3s ease;
-    }
-
-    .skill-card:hover .certificate-badge {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-
 /* Add this to your existing style section */
 html, body {
   overflow: hidden; /* This prevents scrolling on the entire page */
@@ -420,16 +405,6 @@ html, body {
 /* Make sure the slider container doesn't create scrollbars */
 .slider-container {
   overflow: hidden;
-}
-
-/* For the certificate modal scroll */
-.certificate-container {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.certificate-container::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
 }
 
     /* Projects Section - Updated Styles */
@@ -494,94 +469,6 @@ html, body {
     .project-card.flip-out {
       animation: flipBack 0.5s ease forwards;
       pointer-events: none;
-    }
-
-    /* Certificate Modal */
-    .certificate-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(5, 5, 16, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.5s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    .certificate-modal.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .certificate-container {
-      background: var(--dark);
-      border: 2px solid var(--primary);
-      max-width: 800px;
-      width: 90%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 2rem;
-      position: relative;
-      box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
-      transform: scale(0.9);
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .certificate-modal.active .certificate-container {
-      transform: scale(1);
-    }
-
-    .certificate-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--primary);
-    }
-
-    .certificate-title {
-      color: var(--primary);
-      font-size: 1.5rem;
-    }
-
-    .close-certificate {
-      background: transparent;
-      border: none;
-      color: var(--light);
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .close-certificate:hover {
-      color: var(--accent);
-      transform: rotate(90deg);
-    }
-
-    .certificate-image {
-      width: 100%;
-      border: 1px solid var(--secondary);
-      margin: 1rem 0;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .certificate-details {
-      margin-top: 1.5rem;
-    }
-
-    .certificate-details p {
-      margin-bottom: 0.8rem;
-    }
-
-    .certificate-details strong {
-      color: var(--secondary);
     }
 
     .about-text {
@@ -877,6 +764,188 @@ html, body {
         height: 500px;
       }
     }
+
+    /* Skills Section Styles */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.skills-category {
+  flex: 1;
+  min-width: 300px;
+}
+
+.skills-box {
+  background: rgba(0, 180, 255, 0.05);
+  border: 1px solid rgba(0, 180, 255, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: 100%;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.panel.active .skills-box {
+  animation: fadeInUp 0.6s forwards;
+}
+
+.skills-category h3 {
+  color: var(--secondary);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skills-category h3 i {
+  color: var(--primary);
+}
+
+.skill-item {
+  margin-bottom: 1.5rem;
+}
+
+.skill-item i {
+  color: var(--primary);
+  margin-right: 0.5rem;
+  width: 20px;
+  text-align: center;
+}
+
+.skill-bar {
+  height: 6px;
+  background: rgba(0, 180, 255, 0.1);
+  border-radius: 3px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.skill-level {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 3px;
+  position: relative;
+  transition: width 1s ease;
+}
+
+.skill-level::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+              transparent, 
+              rgba(255,255,255,0.3), 
+              transparent);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Horizontal Skills Section */
+.horizontal-skills-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  margin: 2rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--darker);
+  scroll-snap-type: x mandatory;
+}
+
+.horizontal-skills-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-skills-container::-webkit-scrollbar-track {
+  background: var(--darker);
+}
+
+.horizontal-skills-container::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 20px;
+}
+
+.skill-card {
+  min-width: 280px;
+  background: rgba(0, 180, 255, 0.05);
+  border: 1px solid rgba(0, 180, 255, 0.2);
+  padding: 2rem;
+  border-radius: 8px;
+  scroll-snap-align: start;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.skill-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.1);
+  transform: translateY(-5px);
+}
+
+.skill-icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.skill-card h3 {
+  color: var(--secondary);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.skill-card ul {
+  list-style: none;
+}
+
+.skill-card li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+  color: var(--light);
+}
+
+.skill-card li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+.scroll-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--secondary);
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skill-card {
+    min-width: 240px;
+    padding: 1.5rem;
+  }
+  
+  .scroll-indicator {
+    font-size: 0.8rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -891,6 +960,9 @@ html, body {
     <div class="terminal-body">
       <div class="terminal-text" id="terminalText"></div>
       <input type="text" class="skip-input" id="skipInput" placeholder="Type 'get in' to skip..." autocomplete="off">
+      <div style="color: var(--primary); font-size: 0.8rem; text-align: center; margin-top: 0.5rem;">
+        Use desktop site mode while browsing on a mobile phone.
+      </div>
     </div>
   </div>
 
@@ -928,32 +1000,84 @@ html, body {
 
     <div class="panel" id="skills">
       <div class="panel-content">
-        <h1>>_ CERTIFICATE<span style="color: var(--accent)"></span></h1>
-        <div class="skills-grid">
-          <div class="skill-card" onclick="showCertificate('Penetration Testing', 'pt-cert.jpg', 'Certified Ethical Hacker (CEH)', 'EC-Council', '2023')">
-            <i class="fas fa-certificate certificate-badge"></i>
-            <h3><i class="fas fa-bug"></i> Penetration Testing</h3>
-            <p>OWASP Top 10, Metasploit, Burp Suite</p>
+        <h1>>_ My <span style="color: var(--accent)">Skills</span></h1>
+        
+        <div class="horizontal-skills-container">
+          <!-- Cybersecurity Card -->
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Cybersecurity</h3>
+            <ul>
+              <li>Penetration Testing</li>
+              <li>Ethical Hacking</li>
+              <li>Vulnerability Assessment</li>
+            </ul>
           </div>
-          <div class="skill-card" onclick="showCertificate('Network Security', 'ns-cert.jpg', 'Cisco Certified Network Associate (CCNA) Security', 'Cisco', '2022')">
-            <i class="fas fa-certificate certificate-badge"></i>
-            <h3><i class="fas fa-network-wired"></i> NETWORKING</h3>
-            <p>FIREWALL , WIRESHARK , NMAP , NETCAT</p>
+          
+          <!-- Linux Development Card -->
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fas fa-terminal"></i>
+            </div>
+            <h3>Linux Development</h3>
+            <ul>
+              <li>Bash Scripting</li>
+              <li>Kernel Customization</li>
+              <li>System Optimization</li>
+            </ul>
           </div>
-          <div class="skill-card" onclick="showCertificate('Cryptography', 'crypto-cert.jpg', 'Applied Cryptography Specialist', 'Cryptography Institute', '2021')">
-            <i class="fas fa-certificate certificate-badge"></i>
-            <h3><i class="fas fa-lock"></i> OS</h3>
-            <p>PARROT , UBUNTU , KALI , ARCH , WINDOWS , ANDROID</p>
+          
+          <!-- Development Card -->
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3>Development</h3>
+            <ul>
+              <li>Python Programming</li>
+              <li>Open Source</li>
+            </ul>
           </div>
-          <div class="skill-card" onclick="showCertificate('Secure Coding', 'sc-cert.jpg', 'Certified Secure Software Engineer (CSSE)', 'Secure Coding Institute', '2023')">
-            <i class="fas fa-certificate certificate-badge"></i>
-            <h3><i class="fas fa-code"></i>SECURE CODING</h3>
-            <p>PYTHON, BASH, C++, HTML-CSS</p>
+          
+          <!-- Hardware Card -->
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fas fa-microchip"></i>
+            </div>
+            <h3>Hardware</h3>
+            <ul>
+              <li>Hardware Development</li>
+              <li>Custom PC Building</li>
+            </ul>
+          </div>
+          
+          <!-- Other Skills Card -->
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Other Skills</h3>
+            <ul>
+              <li>Aquascaping</li>
+              <li>Technical Training</li>
+            </ul>
           </div>
         </div>
+        
+        <div class="scroll-indicator">
+          <i class="fas fa-chevron-left"></i>
+          <span>Scroll horizontally</span>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        
+        <button class="btn" onclick="goToPanel(3)" style="margin-top: 2rem;">
+          <i class="fas fa-laptop-code"></i> View Projects
+        </button>
       </div>
     </div>
-
+    
     <div class="panel" id="work">
       <div class="panel-content">
         <h1>>_ My <span style="color: var(--accent)">Projects</span></h1>
@@ -1079,24 +1203,6 @@ html, body {
         <button class="btn" onclick="goToPanel(0)">
           <i class="fas fa-home"></i> Return Home
         </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Certificate Modal -->
-  <div class="certificate-modal" id="certificateModal">
-    <div class="certificate-container">
-      <div class="certificate-header">
-        <h3 class="certificate-title" id="certificateTitle">Certificate</h3>
-        <button class="close-certificate" onclick="closeCertificate()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <img src="" alt="Certificate" class="certificate-image" id="certificateImage">
-      <div class="certificate-details">
-        <p><strong>Certificate:</strong> <span id="certificateName"></span></p>
-        <p><strong>Issuing Organization:</strong> <span id="certificateOrg"></span></p>
-        <p><strong>Year Obtained:</strong> <span id="certificateYear"></span></p>
       </div>
     </div>
   </div>
@@ -1340,33 +1446,6 @@ html, body {
       });
     }
 
-    // Certificate Modal Functions
-    function showCertificate(skill, imageSrc, certName, org, year) {
-      const modal = document.getElementById('certificateModal');
-      document.getElementById('certificateTitle').textContent = `${skill} Certification`;
-      document.getElementById('certificateImage').src = imageSrc;
-      document.getElementById('certificateImage').alt = `${skill} Certificate`;
-      document.getElementById('certificateName').textContent = certName;
-      document.getElementById('certificateOrg').textContent = org;
-      document.getElementById('certificateYear').textContent = year;
-      
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeCertificate() {
-      const modal = document.getElementById('certificateModal');
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    // Close modal when clicking outside
-    document.getElementById('certificateModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeCertificate();
-      }
-    });
-
     // Create particles for panel transition
     function createTransitionParticles(fromIndex, toIndex) {
       const fromPanel = panels[fromIndex];
@@ -1503,7 +1582,6 @@ html, body {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') nextPanel();
       if (e.key === 'ArrowLeft') prevPanel();
-      if (e.key === 'Escape') closeCertificate();
     });
 
     // Touch swipe support
